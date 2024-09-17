@@ -1,2 +1,0 @@
-#!/bin/bash
-exec c++ $(echo '' "$@" '' | sed -e 's/ -Werror=unused-command-line-argument / /g')
