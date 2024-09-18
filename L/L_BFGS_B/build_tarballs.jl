@@ -8,7 +8,7 @@ version = v"3.0.1" # <-- This is actually v3.0, but we need to rebuild for more 
 # Collection of sources required to build LBFGSB
 sources = [
     ArchiveSource("http://users.iems.northwestern.edu/~nocedal/Software/Lbfgsb.3.0.tar.gz",
-                  "f5b9a1c8c30ff6bcc8df9b5d5738145f4cbe4c7eadec629220e808dcf0e54720"),
+        "f5b9a1c8c30ff6bcc8df9b5d5738145f4cbe4c7eadec629220e808dcf0e54720"),
     DirectorySource("./bundled"),
 ]
 
@@ -24,7 +24,9 @@ install_license License.txt
 
 # These are the platforms we will build for by default, unless further
 # platforms are passed in on the command line
-platforms = expand_gfortran_versions(filter(p -> Sys.islinux(p) && arch(p) == "aarch64", supported_platforms()))
+platforms = expand_gfortran_versions(Linux(:x86_64))
+# filter the platforms to only include x86_64
+@info "Building for platforms: $(platforms)"
 
 # The products that we will ensure are always built
 products = [
