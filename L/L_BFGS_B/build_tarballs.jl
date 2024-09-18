@@ -3,7 +3,7 @@
 using BinaryBuilder, Pkg
 
 name = "L_BFGS_B"
-version = v"3.0.1" # <-- This is actually v3.0, but we need to rebuild for more platforms
+version = v"3.0.2" # <-- This is actually v3.0, but we need to rebuild for more platforms
 
 # Collection of sources required to build LBFGSB
 sources = [

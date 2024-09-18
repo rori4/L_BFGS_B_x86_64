@@ -1,14 +1,23 @@
---- lbfgsb.f	2012-07-19 06:29:28.000000000 +0800
-+++ lbfgsb.f	2020-02-23 11:19:30.000000000 +0800
-@@ -3279,8 +3279,10 @@
+--- lbfgsb.f	2024-09-18 23:06:00.879033205 +0300
++++ lbfgsb_patched.f	2024-09-18 23:09:44.640830371 +0300
+@@ -2569,6 +2569,8 @@
+          else
+             do 41 i = 1, n
+                x(i) = stp*d(i) + t(i)
++               if (nbd(i).eq.1.or.nbd(i).eq.2) x(i) = max(x(i), l(i))
++               if (nbd(i).eq.2.or.nbd(i).eq.3) x(i) = min(x(i), u(i))
+   41        continue
+          endif
+       else
+@@ -3279,8 +3281,10 @@
   55   continue
        if ( dd_p .gt.zero ) then
           call dcopy( n, xp, 1, x, 1 )
 -         write(6,*) ' Positive dir derivative in projection '
 -         write(6,*) ' Using the backtracking step '
 +         if ( iprint .ge. 0 ) then
-+             write(6,*) ' Positive dir derivative in projection '
-+             write(6,*) ' Using the backtracking step '
++            write(6,*) ' Positive dir derivative in projection '
++            write(6,*) ' Using the backtracking step '
 +         endif
        else
           go to 911
